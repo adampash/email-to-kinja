@@ -2,6 +2,7 @@ require 'sinatra'
 require 'kinja'
 require 'json'
 require_relative './lib/post_client'
+require_relative './lib/email_receiver'
 
 client = Kinja::Client.new(
   user: ENV["KINJA_USER"],
@@ -10,6 +11,7 @@ client = Kinja::Client.new(
 
 post '/' do
   puts params
+  puts EmailReceiver.receive request
   # url = params[:url]
   # post_json = PostClient.get_post_json(url)
   # post = client.post(
