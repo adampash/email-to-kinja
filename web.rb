@@ -10,7 +10,6 @@ client = Kinja::Client.new(
 )
 
 post '/' do
-  puts params
   puts EmailReceiver.receive request
   # url = params[:url]
   # post_json = PostClient.get_post_json(url)
