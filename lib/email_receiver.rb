@@ -1,6 +1,6 @@
 require 'incoming'
 class EmailReceiver < Incoming::Strategies::SendGrid
   def receive(mail)
-    %(Got message from #{mail.to.first} with subject "#{mail.subject} and the text\n#{mail.text}")
+    %(Got message from #{mail.to.first} with subject "#{mail.subject} and the text\n#{mail.body.decoded}")
   end
 end
