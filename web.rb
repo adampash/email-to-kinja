@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'kinja'
 require 'json'
+require 'redcarpet'
 require_relative './lib/post_client'
 require_relative './lib/email_receiver'
 
@@ -18,6 +19,4 @@ post '/' do
     status: "DRAFT"
   )
   status 200
-  # content_type :json
-  # { url: post["data"]["permalink"] }.to_json
 end
