@@ -5,6 +5,7 @@ gem 'sinatra'
 gem 'kinja'
 gem 'puma'
 gem 'incoming'
+gem 'redcarpet'
 
 group :development do
   gem 'rspec'
