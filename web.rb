@@ -10,14 +10,13 @@ client = Kinja::Client.new(
 )
 
 post '/' do
-  puts EmailReceiver.receive request
-  # url = params[:url]
-  # post_json = PostClient.get_post_json(url)
-  # post = client.post(
-  #   headline: '',
-  #   body: PostClient.format_body(post_json),
-  #   status: "PUBLISHED"
-  # )
+  email = EmailReceiver.receive request
+  post = client.post(
+    headline: email.subject,
+    body: email.body.decoded,
+    status: "DRAFT",
+    source: 'markdown'
+  )
   status 200
   # content_type :json
   # { url: post["data"]["permalink"] }.to_json
