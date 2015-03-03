@@ -6,6 +6,7 @@ gem 'kinja'
 gem 'puma'
 gem 'incoming'
 gem 'redcarpet'
+gem 'simple_scrubber'
 
 group :development do
   gem 'rspec'

@@ -72,6 +72,7 @@ GEM
       rspec-support (~> 3.2.0)
     rspec-support (3.2.1)
     shellany (0.0.1)
+    simple_scrubber (0.0.1)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -93,4 +94,5 @@ DEPENDENCIES
   puma
   redcarpet
   rspec
+  simple_scrubber
   sinatra

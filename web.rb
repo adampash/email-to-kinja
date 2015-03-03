@@ -2,6 +2,7 @@ require 'sinatra'
 require 'kinja'
 require 'json'
 require 'redcarpet'
+require 'simple_scrubber'
 require_relative './lib/post_client'
 require_relative './lib/email_receiver'
 
@@ -15,8 +16,9 @@ post '/' do
   email = EmailReceiver.receive request
   post = client.post(
     headline: email.subject,
-    body: markdown.render(email.body.decoded),
+    body: markdown.render(SimpleScrubber.scrub(email.body.decoded, [:email, :phone])),
     status: "DRAFT"
   )
+  puts post
   status 200
 end
