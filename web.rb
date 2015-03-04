@@ -15,8 +15,8 @@ markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(autolink: true, h
 post '/' do
   email = EmailReceiver.receive request
   post = client.post(
-    headline: email.subject,
-    body: "Subject: #{markdown.render(SimpleScrubber.scrub(email.body.decoded, [:email, :phone]))}",
+    headline: "Subject: #{email.subject}",
+    body: markdown.render(SimpleScrubber.scrub(email.body.decoded, [:email, :phone])),
     status: "DRAFT"
   )
   puts post
