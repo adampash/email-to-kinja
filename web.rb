@@ -10,13 +10,13 @@ client = Kinja::Client.new(
   user: ENV["KINJA_USER"],
   password: ENV["KINJA_PASSWORD"]
 )
-markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
+markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(autolink: true, hard_wrap: true))
 
 post '/' do
   email = EmailReceiver.receive request
   post = client.post(
     headline: email.subject,
-    body: markdown.render(SimpleScrubber.scrub(email.body.decoded, [:email, :phone])),
+    body: "Subject: #{markdown.render(SimpleScrubber.scrub(email.body.decoded, [:email, :phone]))}",
     status: "DRAFT"
   )
   puts post
