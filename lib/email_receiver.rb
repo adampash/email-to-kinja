@@ -4,4 +4,8 @@ class EmailReceiver < Incoming::Strategies::SendGrid
     puts %(Got message from #{mail.to.first} with subject "#{mail.subject} and the text\n#{mail.body.decoded}")
     mail
   end
+
+  def self.scrub_fwd(text)
+    text.gsub(/^Fwd?: /i, '')
+  end
 end
