@@ -29,7 +29,7 @@ post '/' do
   post = client.post(
     headline: "Subject: #{subject}",
     body: markdown.render(SimpleScrubber.scrub(email.body.decoded, [:email, :phone])),
-    status: "DRAFT"
+    status: "PUBLISHED"
   )
   url = post["data"]["permalink"]
   puts url
