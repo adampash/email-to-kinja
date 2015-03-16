@@ -3,6 +3,7 @@ require 'kinja'
 require 'json'
 require 'redcarpet'
 require 'simple_scrubber'
+require 'twitter'
 # require 'dotenv'
 # Dotenv.load
 require_relative './lib/post_client'
