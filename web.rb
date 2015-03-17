@@ -32,6 +32,7 @@ post '/' do
     status: "PUBLISHED",
     defaultBlogId: "1634480626"
   )
+  puts post
   url = post["data"]["permalink"]
   puts url
   twitter.update "#{subject} #{url}"
