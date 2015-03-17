@@ -26,9 +26,11 @@ markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(autolink: true, h
 post '/' do
   email = EmailReceiver.receive request
   subject = EmailReceiver.scrub_fwd(email.subject)
+  body = markdown.render(SimpleScrubber.scrub(email.body.decoded.strip, [:email, :phone]))
+  footer = "<hr><p><em>Public Pool is an automated feed of <a href=\"http://politburo.kinja.com/here-are-all-the-white-house-pool-reports-1691913651\">White House press pool reports</a>. For live updates, follow <a href=\"https://twitter.com/whpublicpool\">@WHPublicPool</a> on Twitter.</em></p>"
   post = client.create_post(
     headline: "Subject: #{subject}",
-    body: markdown.render(SimpleScrubber.scrub(email.body.decoded.strip, [:email, :phone])),
+    body: "#{body} #{footer}",
     status: "PUBLISHED",
     defaultBlogId: 1634480626
   )
