@@ -30,7 +30,7 @@ post '/' do
     headline: "Subject: #{subject}",
     body: markdown.render(SimpleScrubber.scrub(email.body.decoded.strip, [:email, :phone])),
     status: "PUBLISHED",
-    defaultBlogId: "1634480626"
+    defaultBlogId: 1634480626
   )
   puts post
   url = post["data"]["permalink"]
