@@ -26,10 +26,11 @@ markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(autolink: true, h
 post '/' do
   email = EmailReceiver.receive request
   subject = EmailReceiver.scrub_fwd(email.subject)
-  post = client.post(
+  post = client.create_post(
     headline: "Subject: #{subject}",
-    body: markdown.render(SimpleScrubber.scrub(email.body.decoded, [:email, :phone])),
-    status: "PUBLISHED"
+    body: markdown.render(SimpleScrubber.scrub(email.body.decoded.strip, [:email, :phone])),
+    status: "PUBLISHED",
+    defaultBlogId: "1634480626"
   )
   url = post["data"]["permalink"]
   puts url

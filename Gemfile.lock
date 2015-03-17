@@ -38,7 +38,7 @@ GEM
       mail (~> 2.4)
       rack
     json (1.8.2)
-    kinja (0.0.1)
+    kinja (0.0.4)
       httparty
     listen (2.9.0)
       celluloid (>= 0.15.2)
