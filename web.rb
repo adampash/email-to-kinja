@@ -36,6 +36,10 @@ post '/' do
   )
   url = post["data"]["permalink"]
   puts url
+  if subject.length > 117
+    overage = subject.length - 117
+    subject = subject[0...-overage]
+  end
   twitter.update "#{subject} #{url}"
   status 200
 end
