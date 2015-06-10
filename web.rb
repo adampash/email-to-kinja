@@ -35,8 +35,10 @@ post '/' do
     defaultBlogId: 1634480626
   )
   if url.scan(/^https?:\/\//).length > 0
+    puts "url good as is"
     url = post["data"]["permalink"]
   else
+    puts "need to add domain to url"
     url = "http://publicpool.gawker.com#{post["data"]["permalink"]}"
   end
   puts url
