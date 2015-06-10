@@ -34,11 +34,11 @@ post '/' do
     status: "PUBLISHED",
     defaultBlogId: 1634480626
   )
+  url = post["data"]["permalink"]
   if url.scan(/^https?:\/\//).length > 0
     puts url.scan(/^https?:\/\//)
     puts url.scan(/^https?:\/\//).length
     puts "url good as is"
-    url = post["data"]["permalink"]
   else
     puts url.scan(/^https?:\/\//)
     puts "need to add domain to url"
