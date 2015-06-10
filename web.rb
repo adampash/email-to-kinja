@@ -34,7 +34,7 @@ post '/' do
     status: "PUBLISHED",
     defaultBlogId: 1634480626
   )
-  url = post["data"]["permalink"]
+  url = "http://publicpool.gawker.com#{post["data"]["permalink"]}"
   puts url
   if subject.length > 117
     overage = subject.length - 117
