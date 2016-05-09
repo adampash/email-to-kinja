@@ -8,4 +8,8 @@ class EmailReceiver < Incoming::Strategies::SendGrid
   def self.scrub_fwd(text)
     text.gsub(/^Fwd?: /i, '')
   end
+
+  def self.scrub_space(text)
+    text.gsub("%20", " ")
+  end
 end
