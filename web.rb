@@ -43,7 +43,7 @@ post '/' do
   else
     puts url.scan(/^https?:\/\//)
     puts "need to add domain to url"
-    url = "http://publicpool.gawker.com#{post["data"]["permalink"]}"
+    url = "http://publicpool.kinja.com#{post["data"]["permalink"]}"
   end
   puts url
   if subject.length > 117
