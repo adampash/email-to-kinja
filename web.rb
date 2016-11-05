@@ -35,6 +35,7 @@ post '/' do
     status: "PUBLISHED",
     defaultBlogId: 1634480626
   )
+  puts post
   url = post["data"]["permalink"]
   if url.scan(/^https?:\/\//).length > 0
     puts url.scan(/^https?:\/\//)
