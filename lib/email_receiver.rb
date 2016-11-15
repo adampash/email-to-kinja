@@ -28,7 +28,10 @@ class EmailReceiver < Incoming::Strategies::SendGrid
   def self.make_paragraph_object(value)
     {
       type: "Paragraph",
-      value: value
+      value: value,
+      containers: [
+
+      ]
     }
   end
 

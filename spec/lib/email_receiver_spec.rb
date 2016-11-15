@@ -23,7 +23,7 @@ describe EmailReceiver do
 
   it "puts those paragraphs into objects" do
     value = "as;dlkjfad"
-    result = { type: "Paragraph", value: value }
+    result = { type: "Paragraph", value: value, containers: [] }
     expect(EmailReceiver.make_paragraph_object(value))
       .to eq result
   end
@@ -56,10 +56,12 @@ describe EmailReceiver do
     [
       {
         type: "Paragraph",
-        value: [{ type: "Text", value: "Hello."}]
+        value: [{ type: "Text", value: "Hello."}],
+        containers: []
       },
       {
         type: "Paragraph",
+        containers: [],
         value: [
           { type: "Text", value: "It's me!" },
           { type: "LineBreak" },
@@ -68,6 +70,7 @@ describe EmailReceiver do
       },
       {
         type: "Paragraph",
+        containers: [],
         value: [{ type: "Text", value: "I'm angry!" }]
       },
     ].push(EmailReceiver.hr).push(EmailReceiver.footer)
