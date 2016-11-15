@@ -21,17 +21,16 @@ twitter = Twitter::REST::Client.new do |config|
   config.access_token_secret = ENV["ACCESS_SECRET"]
 end
 
-markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(autolink: true, hard_wrap: true))
-
 post '/' do
   email = EmailReceiver.receive request
   subject = EmailReceiver.scrub_fwd(email.subject)
-  email_body = EmailReceiver.scrub_space(email.body.decoded.strip)
-  body = markdown.render(SimpleScrubber.scrub(email_body, [:email, :phone]))
-  footer = "<hr><p><em>Public Pool is an automated feed of <a href=\"http://politburo.kinja.com/here-are-all-the-white-house-pool-reports-1691913651\">White House press pool reports</a>. For live updates, follow <a href=\"https://twitter.com/whpublicpool\">@WHPublicPool</a> on Twitter.</em></p>"
+  email_body = SimpleScrubber.scrub(
+    EmailReceiver.scrub_space(email.body.decoded.strip),
+    [:email, :phone]
+  )
   post = client.create_post(
     headline: "Subject: #{subject}",
-    body: "#{body} #{footer}",
+    body: EmailReceiver.convert(email_body),
     status: "PUBLISHED",
     defaultBlogId: 1634480626
   )

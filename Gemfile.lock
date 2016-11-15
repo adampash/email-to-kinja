@@ -31,14 +31,13 @@ GEM
     http (0.6.3)
       http_parser.rb (~> 0.6.0)
     http_parser.rb (0.6.0)
-    httparty (0.13.5)
-      json (~> 1.8)
+    httparty (0.14.0)
       multi_xml (>= 0.5.2)
     incoming (0.1.8)
       mail (~> 2.4)
       rack
     json (1.8.2)
-    kinja (0.0.13)
+    kinja (0.0.17)
       httparty
     listen (2.9.0)
       celluloid (>= 0.15.2)
@@ -116,7 +115,7 @@ DEPENDENCIES
   dotenv
   guard-rspec
   incoming
-  kinja (= 0.0.13)
+  kinja (= 0.0.17)
   pry
   puma
   redcarpet
@@ -124,3 +123,6 @@ DEPENDENCIES
   simple_scrubber
   sinatra
   twitter
+
+BUNDLED WITH
+   1.10.6
