@@ -28,9 +28,17 @@ post '/' do
     EmailReceiver.scrub_space(email.body.decoded.strip),
     [:email, :phone]
   )
+
+  body = EmailReceiver.convert(email_body)
+
+  puts "==========================="
+  puts "HEY LET'S DEBUG THIS SHIT"
+  puts body.to_json
+  puts "==========================="
+
   post = client.create_post(
     headline: "Subject: #{subject}",
-    body: EmailReceiver.convert(email_body),
+    body: body.to_json,
     status: "PUBLISHED",
     defaultBlogId: 1634480626
   )
