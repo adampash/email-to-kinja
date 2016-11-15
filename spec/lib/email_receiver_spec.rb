@@ -31,11 +31,11 @@ describe EmailReceiver do
   it "creates nodes for line breaks" do
     value = "hello\ngoodbye"
     result = [
-      { type: "Text", value: "hello" },
+      { type: "Text", value: "hello", styles: [] },
       {
         "type": "LineBreak"
       },
-      { type: "Text", value: "goodbye" },
+      { type: "Text", value: "goodbye", styles: [] },
     ]
     expect(EmailReceiver.convert_line_breaks(value))
       .to eq result
@@ -56,22 +56,22 @@ describe EmailReceiver do
     [
       {
         type: "Paragraph",
-        value: [{ type: "Text", value: "Hello."}],
+        value: [{ type: "Text", value: "Hello.", styles: []}],
         containers: []
       },
       {
         type: "Paragraph",
         containers: [],
         value: [
-          { type: "Text", value: "It's me!" },
+          { type: "Text", value: "It's me!", styles: [] },
           { type: "LineBreak" },
-          { type: "Text", value: "How are you?" }
+          { type: "Text", value: "How are you?", styles: [] }
         ]
       },
       {
         type: "Paragraph",
         containers: [],
-        value: [{ type: "Text", value: "I'm angry!" }]
+        value: [{ type: "Text", value: "I'm angry!", styles: [] }]
       },
     ].push(EmailReceiver.hr).push(EmailReceiver.footer)
   end

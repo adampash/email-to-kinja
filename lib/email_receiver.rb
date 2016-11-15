@@ -38,7 +38,7 @@ class EmailReceiver < Incoming::Strategies::SendGrid
   def self.convert_line_breaks(shit)
     shit.split(/\n/)
       .map { |line|
-      { type: "Text", value: line.strip }
+      { type: "Text", value: line.strip, styles: [] }
       }.flat_map { |x| [x, {type: "LineBreak"}] }.tap(&:pop)
   end
 
