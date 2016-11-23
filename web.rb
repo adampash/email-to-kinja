@@ -38,7 +38,7 @@ post '/' do
 
   post = client.create_post(
     headline: "Subject: #{subject}",
-    body: body.to_json,
+    body: body,
     status: "PUBLISHED",
     defaultBlogId: 1634480626
   )
