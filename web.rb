@@ -33,14 +33,13 @@ post '/' do
 
   puts "==========================="
   puts "HEY LET'S DEBUG THIS SHIT"
-  puts body.to_json
+  puts body
   puts "==========================="
 
   post = client.create_post(
     headline: "Subject: #{subject}",
     body: body,
-    status: "PUBLISHED",
-    defaultBlogId: 1634480626
+    status: "PUBLISHED"
   )
   puts post
   url = post["data"]["permalink"]
