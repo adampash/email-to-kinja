@@ -14,7 +14,7 @@ class EmailReceiver < Incoming::Strategies::SendGrid
   end
 
   def self.clean_google_group_footer(text)
-    text.sub(/\s*--\s*If you would like to subscribe to this group.*/, "")
+    text.sub(/\s*--\s*You received this message because you are subscribed to the Google Groups "Transition Pool" group.*/, "")
   end
 
   def self.clean_lines(text)
@@ -35,9 +35,12 @@ class EmailReceiver < Incoming::Strategies::SendGrid
 
   def self.clean_single_line_breaks(text)
     text.split(/\n\n+/).map { |line|
-      line.sub(/\n{1}/, ' ')
+      if (line !~ /^--\n/)
+        line.sub(/\n{1}/, ' ')
+      else
+        line
+      end
     }.join("\n\n")
-    # text.gsub(/\n{1}?!\n/, "")
   end
 
   def self.convert(shit)

@@ -47,7 +47,7 @@ describe EmailReceiver do
       value = "--\
               This is legit email but below we don't want\
               --\
-              If you would like to subscribe to this group\
+              You received this message because you are subscribed to the Google Groups \"Transition Pool\" group\
               here is more text blah blah blah"
       result = "--\
               This is legit email but below we don't want"
@@ -71,6 +71,12 @@ describe EmailReceiver do
       result = "This should all be on one line\n\nBut this should be two lines below that, make sense?"
 
       expect(EmailReceiver.clean_single_line_breaks(value)).to eq result
+    end
+
+    it "keeps the single break if preceeded by --" do
+      value = "This should all be on one line\n\n--\nBut the -- should stay where it is"
+
+      expect(EmailReceiver.clean_single_line_breaks(value)).to eq value
     end
 
     it "doesn't do anyting if there are no line breaks" do
