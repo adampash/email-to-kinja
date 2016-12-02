@@ -41,6 +41,30 @@ describe EmailReceiver do
       .to eq result
   end
 
+
+  describe "EmailReceiver.google_group_footer" do
+    it "cleans the google group footer" do
+      value = "--\
+              This is legit email but below we don't want\
+              --\
+              If you would like to subscribe to this group\
+              here is more text blah blah blah"
+      result = "--\
+              This is legit email but below we don't want"
+      expect(EmailReceiver.clean_google_group_footer(value)).to eq result
+    end
+
+    it "doesn't do anything if there's no match" do
+      value = "--\
+              This is legit email but below we should also keep\
+              --\
+              here is more text blah blah blah"
+
+      expect(EmailReceiver.clean_google_group_footer(value)).to eq value
+    end
+  end
+
+
   def graph_text
     <<-HEREDOC
       Hello.

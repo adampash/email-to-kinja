@@ -29,7 +29,9 @@ post '/' do
     [:email, :phone]
   )
 
-  body = EmailReceiver.convert(email_body)
+  body = EmailReceiver.convert(
+    EmailReceiver.clean_google_group_footer(email_body)
+  )
 
   puts "==========================="
   puts "HEY LET'S DEBUG THIS SHIT"

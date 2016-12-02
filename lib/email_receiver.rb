@@ -13,6 +13,10 @@ class EmailReceiver < Incoming::Strategies::SendGrid
     text.gsub("%20", " ")
   end
 
+  def self.clean_google_group_footer(text)
+    text.sub(/\s*--\s*If you would like to subscribe to this group.*/, "")
+  end
+
   def self.convert(shit)
     split_paragraphs(shit).map { |p|
       convert_line_breaks(p)
