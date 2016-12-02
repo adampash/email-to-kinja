@@ -30,7 +30,9 @@ post '/' do
   )
 
   body = EmailReceiver.convert(
-    EmailReceiver.clean_google_group_footer(email_body)
+    EmailReceiver.clean_single_line_breaks(
+      EmailReceiver.clean_google_group_footer(email_body)
+    )
   )
 
   puts "==========================="

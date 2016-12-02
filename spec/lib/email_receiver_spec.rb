@@ -64,6 +64,22 @@ describe EmailReceiver do
     end
   end
 
+  describe "EmailReceiver.clean_single_line_breaks" do
+    it "removes single line breaks but keeps double" do
+      value = "This should\nall be on one line\n\n\nBut this should be two lines below that,\nmake sense?"
+
+      result = "This should all be on one line\n\nBut this should be two lines below that, make sense?"
+
+      expect(EmailReceiver.clean_single_line_breaks(value)).to eq result
+    end
+
+    it "doesn't do anyting if there are no line breaks" do
+      value = "HI THERE"
+
+      expect(EmailReceiver.clean_single_line_breaks(value)).to eq value
+    end
+  end
+
 
   def graph_text
     <<-HEREDOC
