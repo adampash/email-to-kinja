@@ -30,7 +30,7 @@ post '/' do
   )
 
   body = EmailReceiver.convert(
-    EmailReceiver.clean_single_line_breaks(
+    EmailReceiver.clean_lines(
       EmailReceiver.clean_google_group_footer(email_body)
     )
   )

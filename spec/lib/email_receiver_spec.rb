@@ -80,6 +80,81 @@ describe EmailReceiver do
     end
   end
 
+  describe "EmailReciever.split_from_chunk" do
+    it "splits the from chunk from the rest of the text if it exists" do
+      email = "From: Lucía Leal <xxx@efeamerica.com>\n\
+Sent: Thursday, December 1, 2016 20:13\n\
+To: Goodman, Meghan Hays K. EOP/OVP\n\
+Subject: VP pool report #3\n\
+\n\
+Vice President Biden arrived at Casa de Huespedes Ilustres at around 19:30.\n\
+He was greeted by President Santos, dressed with beige pants and a white shirt with a pin of a white dove."
+
+      result = [
+        "From: Lucía Leal <xxx@efeamerica.com>\n\
+Sent: Thursday, December 1, 2016 20:13\n\
+To: Goodman, Meghan Hays K. EOP/OVP\n\
+Subject: VP pool report #3\n\n",
+"Vice President Biden arrived at Casa de Huespedes Ilustres at around 19:30.\n\
+He was greeted by President Santos, dressed with beige pants and a white shirt with a pin of a white dove."
+
+      ]
+      expect(EmailReceiver.split_from_chunk(email)).to eq result
+    end
+
+    it "only happens on the from chunk" do
+      email = "Sent: Thursday, December 1, 2016 20:13\
+To: Goodman, Meghan Hays K. EOP/OVP\
+Subject: VP pool report #3\
+\
+Vice President Biden arrived at Casa de Huespedes Ilustres at around 19:30.\
+He was greeted by President Santos, dressed with beige pants and a white shirt with a pin of a white dove."
+
+      expect(EmailReceiver.split_from_chunk(email)).to eq [email]
+    end
+  end
+
+  describe "EmailReciever.clean_lines" do
+    it "splits the from chunk, cleans the body, and puts them back together" do
+      email = "From: Lucía Leal <xxx@efeamerica.com>\n\
+Sent: Thursday, December 1, 2016 20:13\n\
+To: Goodman, Meghan Hays K. EOP/OVP\n\
+Subject: VP pool report #3\n\
+\n\
+Vice President Biden arrived at Casa de Huespedes Ilustres at around 19:30.\n\
+He was greeted by President Santos, dressed with beige pants and a white shirt with a pin of a white dove."
+
+      result = "From: Lucía Leal <xxx@efeamerica.com>\n\
+Sent: Thursday, December 1, 2016 20:13\n\
+To: Goodman, Meghan Hays K. EOP/OVP\n\
+Subject: VP pool report #3\n\
+\n\
+Vice President Biden arrived at Casa de Huespedes Ilustres at around 19:30. He was greeted by President Santos, dressed with beige pants and a white shirt with a pin of a white dove."
+
+      expect(EmailReceiver.clean_lines(email)).to eq result
+    end
+    it "doesn't do anything if there's nothing to be done" do
+      email = "Wow what an email"
+
+      expect(EmailReceiver.clean_lines(email)).to eq email
+    end
+  end
+
+  describe "EmailReciever.split_from_chunk" do
+    it "splits the from chunk from the rest of the text if it exists" do
+      email = "From: Lucía Leal <xxx@efeamerica.com>\
+Sent: Thursday, December 1, 2016 20:13\
+To: Goodman, Meghan Hays K. EOP/OVP\
+Subject: VP pool report #3\
+\
+Vice President Biden arrived at Casa de Huespedes Ilustres at around 19:30.
+He was greeted by President Santos, dressed with beige pants and a white shirt with a pin of a white dove."
+
+      result = email.split(/\n\n/)
+
+    end
+  end
+
 
   def graph_text
     <<-HEREDOC

@@ -17,6 +17,22 @@ class EmailReceiver < Incoming::Strategies::SendGrid
     text.sub(/\s*--\s*If you would like to subscribe to this group.*/, "")
   end
 
+  def self.clean_lines(text)
+    from_block, body = split_from_chunk(text)
+    if body.nil?
+      from_block
+    else
+      [
+        from_block,
+        clean_single_line_breaks(body)
+      ].join('')
+    end
+  end
+
+  def self.split_from_chunk(text)
+    text.partition(/(^From:.*To:.*)\n\n/m).reject { |c| c.empty? }
+  end
+
   def self.clean_single_line_breaks(text)
     text.split(/\n\n+/).map { |line|
       line.sub(/\n{1}/, ' ')
