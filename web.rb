@@ -23,6 +23,10 @@ end
 
 post '/' do
   email = EmailReceiver.receive request
+  puts "==========================="
+  puts "HEY HERE'S THE WHOLE EMAIL"
+  puts email
+  puts "==========================="
   subject = EmailReceiver.scrub_fwd(email.subject)
   email_body = SimpleScrubber.scrub(
     EmailReceiver.scrub_space(email.body.decoded.strip),
