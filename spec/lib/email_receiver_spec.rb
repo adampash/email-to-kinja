@@ -44,12 +44,23 @@ describe EmailReceiver do
 
   describe "EmailReceiver.google_group_footer" do
     it "cleans the google group footer" do
-      value = "--\
-              This is legit email but below we don't want\
-              --\
-              You received this message because you are subscribed to the Google Groups \"Transition Pool\" group\
+      value = "--\n\
+              This is legit email but below we don't want\n\
+              --\n\
+              You received this message because you are subscribed to the Google Groups \"Transition Pool\" group\n\
               here is more text blah blah blah"
-      result = "--\
+      result = "--\n\
+              This is legit email but below we don't want"
+      expect(EmailReceiver.clean_google_group_footer(value)).to eq result
+    end
+
+    it "cleans this other google group footer" do
+      value = "--\n\
+              This is legit email but below we don't want\
+              --\nIf you would like to subscribe to this group, please fill out the form here: https://docs.google.com/forms/d/e/1FAIpQLSf0ltDTLI7xxIdh4N4iZJY2tPPuJdoag3WJ8qy8ktrLnJxE9Q/viewform
+
+      You may view the pool rotation here"
+      result = "--\n\
               This is legit email but below we don't want"
       expect(EmailReceiver.clean_google_group_footer(value)).to eq result
     end

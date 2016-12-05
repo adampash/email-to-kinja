@@ -14,7 +14,9 @@ class EmailReceiver < Incoming::Strategies::SendGrid
   end
 
   def self.clean_google_group_footer(text)
-    text.sub(/\s*--\s*You received this message because you are subscribed to the Google Groups "Transition Pool" group.*/, "")
+    text
+      .sub(/\s*--\s*You received this message because you are subscribed to the Google Groups "Transition Pool" group.*/m, "")
+      .sub(/\s*--\s*If you would like to subscribe to this group.*/m, "")
   end
 
   def self.clean_lines(text)
