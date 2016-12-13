@@ -5,6 +5,11 @@ class EmailReceiver < Incoming::Strategies::SendGrid
     mail
   end
 
+  def self.is_otr(text)
+    otr_re = /\b(otr)|(off the record)\b/i
+    !(text =~ otr_re).nil?
+  end
+
   def self.scrub_fwd(text)
     text.gsub(/^Fwd?: /i, '')
   end

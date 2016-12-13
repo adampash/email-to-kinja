@@ -39,6 +39,8 @@ post '/' do
     )
   )
 
+  status = (EmailReceiver.is_otr(subject) || EmailReceiver.is_otr(body)) ? "DRAFT" : "PUBLISHED"
+
   puts "==========================="
   puts "HEY LET'S DEBUG THIS SHIT"
   puts body
@@ -47,7 +49,7 @@ post '/' do
   post = client.create_post(
     headline: "Subject: #{subject}",
     body: body,
-    status: "PUBLISHED",
+    status: status,
     defaultBlogId: 1634480626
   )
   puts post

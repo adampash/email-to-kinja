@@ -1,6 +1,22 @@
 require_relative '../../lib/email_receiver'
 
 describe EmailReceiver do
+  it "checks for otr or off the record" do
+    text = "This is off the record"
+    t1 = "this is otr"
+    t2 = "this is fine"
+    t3 = "OTR report"
+    t4 = "OFF THE RECORD report"
+    t5 = "wotrix"
+
+    expect(EmailReceiver.is_otr(text)).to be true
+    expect(EmailReceiver.is_otr(t1)).to be true
+    expect(EmailReceiver.is_otr(t2)).to be false
+    expect(EmailReceiver.is_otr(t3)).to be true
+    expect(EmailReceiver.is_otr(t4)).to be true
+    expect(EmailReceiver.is_otr(t5)).to be false
+  end
+
   it "scrubs fwd text from subject" do
     subj = "Fw: This is a thing"
     expect(EmailReceiver.scrub_fwd(subj)).to eq "This is a thing"
