@@ -56,6 +56,7 @@ class EmailReceiver < Incoming::Strategies::SendGrid
     }.map { |p| make_paragraph_object(p) }
       .push(hr)
       .push(footer)
+      .select { |elem| !elem.value.empty? }
   end
 
   def self.split_paragraphs(shit)
