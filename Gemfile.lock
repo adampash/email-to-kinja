@@ -37,7 +37,7 @@ GEM
       mail (~> 2.4)
       rack
     json (1.8.2)
-    kinja (0.0.18)
+    kinja (0.0.19)
       httparty
     listen (2.9.0)
       celluloid (>= 0.15.2)
@@ -50,7 +50,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
     mime-types (2.4.3)
-    multi_xml (0.5.5)
+    multi_xml (0.6.0)
     multipart-post (2.0.0)
     naught (1.0.0)
     nenv (0.2.0)
@@ -115,7 +115,7 @@ DEPENDENCIES
   dotenv
   guard-rspec
   incoming
-  kinja (= 0.0.18)
+  kinja (= 0.0.19)
   pry
   puma
   redcarpet
