@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.0'
 
 gem 'sinatra'
-gem 'kinja', '0.0.22'
+gem 'kinja', '0.0.23'
 gem 'puma'
 gem 'incoming'
 gem 'redcarpet'
