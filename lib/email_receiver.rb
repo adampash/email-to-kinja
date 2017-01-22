@@ -53,9 +53,15 @@ class EmailReceiver < Incoming::Strategies::SendGrid
   def self.convert(shit)
     split_paragraphs(shit).map { |p|
       convert_line_breaks(p)
-    }.map { |p| make_paragraph_object(p) }
-      .push(hr)
-      .push(footer)
+    }.map { |p|
+      if p.nil? || p.empty?
+        nil
+      else
+        make_paragraph_object(p)
+      end
+    }.reject { |p| p.nil? }
+     .push(hr)
+     .push(footer)
       # .select { |elem| !(elem[:value].nil? || !elem[:value].empty?) }
   end
 
